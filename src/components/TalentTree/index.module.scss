@@ -1,0 +1,395 @@
+.talentTreeContainer {
+  width: 100%;
+  display: grid;
+  grid-template-areas: "content";
+  overflow: auto;
+  max-height:60vh;
+}
+
+.resourceBars {
+  display: grid;
+  grid-area: content;
+  z-index: 1;
+  align-self: stretch;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.resourceBar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+  
+  &.economy {
+    background: url("../../assets/economy.png") center center repeat-y transparent;
+    background-size: 100% auto;
+  }
+  
+  &.science {
+    background: url("../../assets/science.png") center center repeat-y transparent;
+    background-size: 100% auto;
+  }
+  
+  &.faith {
+    background: url("../../assets/faith.png") center center repeat-y transparent;
+    background-size: 100% auto;
+  }
+}
+
+.resourceFill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--cinnabar);
+  transition: height 0.3s ease;
+  opacity: 0.9;
+}
+
+.resourceLabel {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: var(--eerie-black);
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-shadow: 0px 0px 2px white;
+}
+
+.talentTree {
+  grid-area: content;
+  z-index: 2;
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 33.333%);
+  grid-template-rows: repeat(50, 50px);
+  justify-items: center;
+  position: relative;
+}
+
+.talent {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  border: 2px solid var(--cinnabar);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  z-index: 2;
+  position: relative;
+  
+  &.unlocked {
+    background: var(--light-yellow);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    }
+  }
+  
+  &.locked {
+    background: rgba(200, 200, 200, 0.5);
+    cursor: not-allowed;
+    filter: grayscale(0.8);
+  }
+  
+  &.active {
+    background: var(--tomato) !important;
+    border-color: gold !important;
+    box-shadow: 0 0 15px gold !important;
+    filter: brightness(1) !important;
+    cursor: pointer !important;
+  }
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  font-size: 24px;
+  z-index: 2;
+}
+
+.talentName {
+  font-size: 9px;
+  color: var(--eerie-black);
+  opacity: 0.9;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: bold;
+  text-shadow: 0 0 2px white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  z-index: 1;
+  padding: 0 2px;
+}
+
+.talentDependency {
+  height: 2px;
+  background: var(--gunmetal);
+  z-index: 1;
+  position: absolute;
+}
+
+/* Общие стили тултипа */
+.talentTooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: var(--white-smoke);
+  padding: 12px;
+  border-radius: 4px;
+  min-width: 280px;
+  max-width: 320px;
+  z-index: 1000;
+  border: 1px solid #635301;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(255, 215, 0, 0.3);
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation: tooltipFadeIn 0.2s ease-in-out;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #635301;
+  }
+  
+  &.tooltip-left {
+    &::before {
+      left: 30px;
+      transform: translateX(0);
+    }
+  }
+  
+  &.tooltip-right {
+    &::before {
+      left: auto;
+      right: 30px;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* Анимация появления тултипа */
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Новый стиль WoW-заголовка */
+.tooltipHeaderWow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #635301;
+  padding-bottom: 6px;
+}
+
+.tooltipIcon {
+  font-size: 24px;
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  &.economy {
+    background: rgba(255, 204, 0, 0.15);
+    border-color: rgba(255, 204, 0, 0.3);
+  }
+  
+  &.science {
+    background: rgba(51, 204, 255, 0.15);
+    border-color: rgba(51, 204, 255, 0.3);
+  }
+  
+  &.faith {
+    background: rgba(255, 153, 204, 0.15);
+    border-color: rgba(255, 153, 204, 0.3);
+  }
+}
+
+.tooltipTitleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltipHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #635301;
+  padding-bottom: 4px;
+}
+
+.tooltipCategory {
+  font-size: 12px;
+  opacity: 0.8;
+  
+  &.economy {
+    color: #ffcc00;
+  }
+  
+  &.science {
+    color: #33ccff;
+  }
+  
+  &.faith {
+    color: #ff99cc;
+  }
+}
+
+.tooltipName {
+  font-weight: bold;
+  font-size: 14px;
+  color: #ffd100;
+  margin-bottom: 3px;
+}
+
+.tooltipDescription {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+}
+
+.tooltipSectionTitle {
+  font-size: 12px;
+  font-weight: bold;
+  color: #aaccff;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(170, 204, 255, 0.3);
+  padding-bottom: 3px;
+}
+
+.tooltipEffects {
+  margin-bottom: 10px;
+}
+
+.effectsList {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.effectItem {
+  font-size: 11px;
+  padding: 2px 0;
+  color: #99ff99;
+  
+  &::before {
+    content: "• ";
+  }
+}
+
+/* Стили для выделенного текста в тултипе */
+:global(.positive) {
+  color: #00ff00 !important;
+  font-weight: bold !important;
+}
+
+:global(.negative) {
+  color: #ff6666 !important;
+  font-weight: bold !important;
+}
+
+:global(.project) {
+  color: #ffcc00 !important;
+  font-weight: bold !important;
+}
+
+:global(.cost) {
+  color: #ff6666 !important;
+  font-weight: bold !important;
+}
+
+:global(.economy-req) {
+  color: #ffcc00 !important;
+  font-weight: bold !important;
+}
+
+:global(.science-req) {
+  color: #33ccff !important;
+  font-weight: bold !important;
+}
+
+:global(.faith-req) {
+  color: #ff99cc !important;
+  font-weight: bold !important;
+}
+
+:global(.resource-req) {
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+:global(.talent-name) {
+  color: #aaccff !important;
+  font-weight: bold !important;
+}
+
+.tooltipStatus {
+  font-size: 11px;
+  font-style: italic;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltipRequirements {
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+.requirementsList {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 4px 0 0 0;
+}
+
+.requirementsList li {
+  padding: 2px 0;
+  
+  &::before {
+    content: "• ";
+  }
+}
+
+.activeStatus {
+  color: #99ff99;
+}
+
+.availableStatus {
+  color: #ffcc00;
+}
+
+.lockedStatus {
+  color: #ff6666;
+} 

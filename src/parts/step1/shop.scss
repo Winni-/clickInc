@@ -1,0 +1,121 @@
+.upgrade-button {
+  position: relative;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border: 2px solid #8f6e2f;
+  border-radius: 8px;
+  background-color: #ffeecb;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  
+  &:hover {
+    transform: scale(1.02);
+    border-color: #bb9655;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  &.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: #e6e0d4;
+    border-color: #a5a090;
+    
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.upgrade-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.upgrade-icon-bg {
+  font-size: 20px;
+  line-height: 20px;
+  display: block;
+  margin: 1px;
+}
+
+.upgrade-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.upgrade-icon-main {
+  font-size: 32px;
+  margin-right: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upgrade-info {
+  flex: 1;
+}
+
+.upgrade-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #5a3800;
+}
+.upgrade-spheres {
+  font-size: 12px;
+  opacity: 0.5;
+  margin-left: 4px;
+  font-weight: normal;
+}
+
+.upgrade-details {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #7a6340;
+  
+  span {
+    margin-right: 12px;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.upgrade-level {
+  font-weight: bold;
+}
+
+.upgrade-cost {
+  color: #c06000;
+}
+
+.upgrade-gain {
+  color: #047a16;
+} 

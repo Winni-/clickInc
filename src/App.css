@@ -1,0 +1,44 @@
+:root{
+  /* CSS HEX */
+  --white-smoke: #efefedff;
+  --alabaster: #ebe3d8ff;
+  --light-yellow: #ffffe3ff;
+  --melon: #FFB096;
+  --tomato: #ff6048ff;
+  --cinnabar: #db5f43ff;
+  --cornell-red: #af1510ff;
+  --eerie-black: #1d1b1cff;
+  --gunmetal: #2e3439ff;
+}
+#root{
+  width: 100%;
+  height: 100%;
+}
+.App {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  color: var(--eerie-black);
+  background: var(--alabaster);
+}
+.start{
+  display: none;
+}
+.viewport{
+  height: 100%;
+  width: 100%;
+}
+.step0{
+  display: block;
+}
+.step1{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.step2{
+  display: none;
+}
+

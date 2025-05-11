@@ -1,0 +1,162 @@
+.step1 {
+  display: grid;
+  grid-template:
+    "h h h" 40px
+    "d m m" 50vh
+    "d m m" 13vh
+    "p p s" 35vh;
+  opacity: 0;
+  transition: opacity 1s ease;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 100vh;
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.header {
+  grid-area: h;
+  background: var(--alabaster);
+  display: block;
+  position: relative;
+}
+
+.tooltipContainer {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.infoIcon {
+  cursor: pointer;
+  color: var(--cinnabar);
+  font-size: 14px;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 12px;
+  line-height: 1.4;
+  z-index: 100;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  text-align: left;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  transparent  transparent rgba(0, 0, 0, 0.8) transparent;
+  }
+}
+
+.tooltipContainer:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.development {
+  grid-area: d;
+  background: var(--melon);
+  box-shadow: inset 0px 0px 3px 9px var(--alabaster), inset 0px 0px 0px 10px var(--cinnabar);
+  padding: 10px;
+  overflow: hidden;
+}
+
+
+.click {
+  grid-area: l;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.mapContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  grid-area: m;
+  overflow-y: scroll;
+  border-radius: 10px;
+  background: white;
+  
+  :global(.map) {
+    transition: transform 0.1s ease;
+    
+    &.clicking {
+      transform: scale(0.95) !important;
+    }
+  }
+}
+
+.projects {
+  grid-area: p;
+  background: var(--melon);
+  box-shadow: inset 0px 0px 3px 9px var(--alabaster), inset 0px 0px 0px 10px var(--cinnabar);
+  padding: 10px;
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+.upgrades {
+  grid-area: s;
+  background: var(--melon);
+  box-shadow: inset 0px 0px 3px 9px var(--alabaster), inset 0px 0px 0px 10px var(--cinnabar);
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.shop {
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  
+  button {
+    &:disabled {
+      opacity: 50%;
+    }
+    color: white;
+    border: 0;
+    min-height: 50px;
+    
+  }
+}
+
+.particlesCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.coinsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}

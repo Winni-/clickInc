@@ -1,0 +1,32 @@
+.step0 {
+  display: grid;
+  grid-template:
+    "h h h" 25px
+    "m m m" auto;
+  transition: padding-left 1s ease;
+  background: white;
+  
+}
+.selected {
+  padding-left: 35%;
+}
+
+.header {
+  grid-area: h;
+  background: var(--cornell-red);
+  background-size: cover;
+  color: var(--alabaster);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.mapContainer {
+  grid-area: m;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  :global(.map) {
+    width: 100%;
+    height: 100%;
+  }
+} 
