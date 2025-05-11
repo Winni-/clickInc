@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/clickinc/static/css/main.6329e085.css",
+    "main.js": "/clickinc/static/js/main.2352d9ba.js",
+    "static/js/135.f8358308.chunk.js": "/clickinc/static/js/135.f8358308.chunk.js",
+    "static/js/453.95007742.chunk.js": "/clickinc/static/js/453.95007742.chunk.js",
+    "static/media/faith.png": "/clickinc/static/media/faith.31f917bcd7f02da076ef.png",
+    "static/media/economy.png": "/clickinc/static/media/economy.238ff9af01cc12bd0ff7.png",
+    "static/media/science.png": "/clickinc/static/media/science.57c7c41f332176f4c1a3.png",
+    "index.html": "/clickinc/index.html",
+    "main.6329e085.css.map": "/clickinc/static/css/main.6329e085.css.map",
+    "main.2352d9ba.js.map": "/clickinc/static/js/main.2352d9ba.js.map",
+    "135.f8358308.chunk.js.map": "/clickinc/static/js/135.f8358308.chunk.js.map",
+    "453.95007742.chunk.js.map": "/clickinc/static/js/453.95007742.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6329e085.css",
+    "static/js/main.2352d9ba.js"
+  ]
+}
