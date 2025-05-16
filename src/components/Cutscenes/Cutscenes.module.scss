@@ -230,9 +230,17 @@
 
 .transitionCutscene {
   background: linear-gradient(135deg, var(--cornell-red), var(--eerie-black));
+  background-image: url('../../assets/first/back.jpg');
   
   .title {
     color: var(--light-yellow);
+  }
+  .rod {
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/first/rod.png');
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }
 

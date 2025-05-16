@@ -114,6 +114,7 @@ const StageTransitionCutscene: FC<StageTransitionCutsceneProps> = ({
       case 2:
         return {
           title: 'Объединение Земли',
+          //TODO: описание в зависимости от того что в state.secondStage
           description: 'Под вашим руководством человечество объединилось. Теперь можно сосредоточить усилия на подготовке к космической угрозе.',
         };
       case 3:
@@ -137,7 +138,7 @@ const StageTransitionCutscene: FC<StageTransitionCutsceneProps> = ({
         <h1 className={styles.title}>{content.title}</h1>
         <p className={styles.description}>{content.description}</p>
         <div className={styles.animationContainer}>
-          {/* Здесь будет размещена анимация для соответствующего этапа */}
+          <div className={styles.rod}></div>
           <div className={styles.placeholder}>
             [Анимация для этапа {targetStage} будет добавлена позже]
           </div>
