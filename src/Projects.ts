@@ -172,11 +172,7 @@ export const Projects: Record<string, Project> = {
         progress: 0.1,
         speed: 1,
         effects: [
-            (state) => {
-                const artefacts = ['nanotubes', 'quantum-threads', 'dark-matter', 'negative-mass-matter'];
-                const randomArtefact = artefacts[Math.floor(Math.random() * artefacts.length)];
-                state.secondStage.push(randomArtefact);
-            },
+            // will turn RESEARCH_ARTIFACT on
         ],
         failEffects: [
             (state) => state.resources -= 1500
@@ -203,6 +199,7 @@ export const Projects: Record<string, Project> = {
             (state) => {
                 if (Math.random() < 0.5) {
                     state.secondStage.push('contact')
+                    state.newsQueue.push('special-contact');
                 }
             }
         ],
@@ -220,6 +217,172 @@ export const Projects: Record<string, Project> = {
                 state.problems.push({
                     id: 'rationalists',
                     projectId: 'extraterrestrial-search'
+                });
+            }
+        ]
+    },
+    'strange-dust': {
+        id: 'strange-dust',
+        name: 'Strange Dust',
+        description: 'Проводится эксперимент по созданию странного вещества, которое может стать ответом на наши вопросы',
+        icon: '🧬',
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.secondStage.push('spice')
+        ],
+        failEffects: [
+            (state) => state.resources -= 1500
+        ],
+        problems: [
+            (state) => {
+                
+                state.problems.push({
+                    id: 'spice-explosion',
+                    projectId: 'strange-dust'
+                });
+                state.problems.push({
+                    id: 'spice-empty',
+                    projectId: 'strange-dust'
+                });
+            }
+        ]
+    },
+    'nanoshield': {
+        id: 'nanoshield',
+        name: 'Nanoshield',
+        description: 'Создать щит, защищающий корабль от опасностей при быстром перемещении',
+        icon: '🌌',
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.cosmicCivilization.shipShield = true
+        ],
+        failEffects: [
+
+        ],
+        problems: [
+
+        ]
+    },
+    'spice-shield': {
+        id: 'spice-shield',
+        name: 'Spice Shield',
+        description: 'Создать щит, защищающий корабль от опасностей при быстром перемещении',
+        icon: '🌌',
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.cosmicCivilization.shipShield = true
+        ],
+        failEffects: [
+            (state) => state.resources -= 1500
+        ],
+        problems: [
+            
+        ]
+    },
+    'quantum-beacon': {
+        id: 'quantum-beacon',
+        name: 'Quantum Beacon',
+        description: 'Создание квантовых маяков, что позволит нам перемещаться между планетами',
+        icon: '🌌',
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.cosmicCivilization.conquest = true
+        ],
+        failEffects: [
+
+        ],
+        problems: [
+            
+        ]
+    },
+    'space-folding-engine': {
+        id: 'space-folding-engine',
+        name: 'Space Folding Engine',
+        description: 'Создание двигателя, что позволит нам перемещаться между планетами',
+        icon: '🌌',
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.cosmicCivilization.FTL = true
+        ],
+        failEffects: [
+            (state) => state.resources -= 1500
+        ],
+        problems: [
+            
+        ]
+    },
+    'white-hole': {
+        id: 'white-hole',
+        name: 'White Hole',
+        description: 'Создание чревоточины, что позволит нам перемещаться между планетами',
+        icon: '🌌',
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.cosmicCivilization.FTL = true
+        ],
+        failEffects: [
+            (state) => state.resources -= 1500
+        ],
+        problems: [
+            (state) => {
+                state.problems.push({
+                    id: 'collapse',
+                    projectId: 'white-hole'
+                });
+            }
+        ]
+    },
+    'big-fold': {
+        id: 'big-fold',
+        name: 'Big Fold',
+        description: 'Сворачивание пространства от нас прямо к врагу!',
+        icon: '🌌', 
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.cosmicCivilization.FTL = true
+        ],
+        failEffects: [
+            (state) => state.resources -= 1500
+        ],
+        problems: [
+            (state) => {
+                state.problems.push({
+                    id: 'big-collapse',
+                    projectId: 'big-fold'
+                });
+            }
+        ]
+    },
+    'obsidian-portal': {
+        id: 'obsidian-portal',
+        name: 'Obsidian Portal',
+        description: 'Создание портала, что позволит нам перемещаться между планетами',
+        icon: '🌌',
+        progress: 0.1,
+        speed: 1,
+        effects: [
+            (state) => state.cosmicCivilization.FTL = true,
+            (state) => state.cosmicCivilization.conquest = true,
+            (state) => state.activeEvents.push({
+                id: 'gold-bar',
+                position: [0,0]
+            })
+        ],
+        failEffects: [
+            (state) => state.resources -= 1500
+        ],
+        problems: [
+            (state) => {
+                state.problems.push({
+                    id: 'cripper',
+                    projectId: 'obsidian-portal'
                 });
             }
         ]

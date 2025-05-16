@@ -65,7 +65,8 @@
   z-index: 2;
   min-height: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 33.333%);
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 10px;
   grid-template-rows: repeat(50, 50px);
   justify-items: center;
   position: relative;

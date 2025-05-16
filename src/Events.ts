@@ -131,7 +131,9 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
       },
     ],
     weight: 0.05,
-    conditions: [],
+    conditions: [
+      (state) => state.activeProjects.some(project => project.id === 'research-artifact'),
+    ],
     cooldown: 1000 * 10,
     once: false
   },
@@ -160,6 +162,46 @@ export const GAME_EVENTS: Record<string, GameEvent> = {
       (state) => state.resources > 1000
     ],
     cooldown: 60000,
+    once: false
+  },
+  "OPEN_PLANET": {
+    id: "OPEN_PLANET",
+    type: "random",
+    name: "Открытие новой планеты",
+    description: "Открытие новой планеты",
+    icon: "🌍",
+    position: "random", 
+    message: "Открытие новой планеты",
+    effects: [
+      (state) => {
+        //research new planet
+      }
+    ],
+    weight: 0.01,
+    conditions: [
+      (state) => state.cosmicCivilization.conquest === true
+    ],
+    cooldown: 1000 * 10,
+    once: false
+  },
+  "GOLD_BAR": { 
+    id: "GOLD_BAR",
+    type: "random",
+    name: "Золотой слиток",
+    description: "Золотой слиток",
+    icon: "💰",
+    position: "random",
+    message: "Золотая баржа",
+    effects: [
+      (state) => {
+        state.resources += 10000;
+      }
+    ],
+    weight: 0.01,
+    conditions: [
+      (state) => state.resources > 10000
+    ],
+    cooldown: 1000 * 10,
     once: false
   }
 };

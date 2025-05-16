@@ -140,5 +140,25 @@ export const News: Record<string, NewsItem> = {
     id: 'special-talent-unlocked',
     text: 'Новый талант раскрыт! Ваши способности растут, и мир трепещет!',
     stage: 'special'
-  }
+  },
+  'special-contact': {
+    id: 'special-contact',
+    text: 'Мы нашли контакт с внеземными цивилизациями!',
+    stage: 'special'
+  },
+  'special-hell': {
+    id: 'special-hell',
+    text: 'Почему в этом измерении так много свиней?',
+    stage: 'special'
+  },
+  'special-hell2': {
+    id: 'special-hell2',
+    text: 'В этом измерении все такое красное, это что? Это коммунизм, сынок!',
+    stage: 'special'
+  },
+  'ship-shield': {
+    id: 'ship-shield',
+    text: 'Агентство внешнего космоса напоминает, пена с силовых щитов хоть и вкусная, едой не является, пожалуйста воздержитесь от ее поедания, рабочие наносят ее уже в 4й раз за неделю.',
+    stage: 'special'
+  },
 };

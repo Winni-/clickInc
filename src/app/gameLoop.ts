@@ -73,10 +73,11 @@ function selectEvent(state: GameState): GameEvent | null {
 // Предрасчет условий видимости и доступности для талантов
 function recalculateTalents(state: GameState): StateTalent[] {
   // Получаем список активных талантов
-  const activeTalentIds = TALENTS.filter(t => t.state === 'active').map(t => t.id);
+  const activeTalentIds = state.talents.filter(t => t.state === 'active').map(t => t.id);
   
   // Обрабатываем таланты и добавляем вычисленную информацию
   return TALENTS.map(talent => {
+    const stateTalent = state.talents.find(t => t.id === talent.id);
     // Проверяем условие видимости
     const isVisible = talent.visible.every(condition => condition(state));
     
@@ -91,7 +92,8 @@ function recalculateTalents(state: GameState): StateTalent[] {
     return {
       id: talent.id,
       isVisible,
-      isAvailable
+      isAvailable,
+      state: stateTalent!.state
     };
   });
 }
@@ -165,9 +167,13 @@ const checkConquest = (state: GameState): [conquestHistory,MapEvent[]] => {
   const randomCountry = COUNTRY_NAMES.filter(country => !state.conqueredCountries.includes(country))[Math.floor(Math.random() * COUNTRY_NAMES.filter(country => !state.conqueredCountries.includes(country)).length)];
   const conquestEvent = DynamicEvents.BUY_COUNTRY(state, randomCountry);
   if (!conquestEvent) return [state.lastConquest,state.mapEvents];
-  if (Math.random() * 100 < conquestEvent.weight * (state.conquestSpeed + (state.resources / 10000000))) return [state.lastConquest,state.mapEvents];
+  console.log(conquestEvent.weight * (state.conquestSpeed + (state.total / 100000)));
+  // return previous conquest
+  if ( conquestEvent.weight * (state.conquestSpeed + (state.total / 100000)) < Math.random() * 100) return [state.lastConquest,state.mapEvents];
+  console.log('conquest event triggered');
+  
   // @ts-ignore
-  if (state.lastConquest.lastTriggered && Date.now() - state.lastConquest.lastTriggered < (conquestEvent?.cooldown / state.conquestSpeed)) return [state.lastConquest,state.mapEvents];
+  if (state.lastConquest.lastTriggered && Date.now() - state.lastConquest.lastTriggered < (conquestEvent?.cooldown / (state.conquestSpeed * state.total) )) return [state.lastConquest,state.mapEvents];
 
   return [{
     ...state.lastConquest,
@@ -377,6 +383,7 @@ export const calculateTick = (state: GameState, deltaTime: number, windowSize: {
       }
     }
   });
+
   
   return updates;
 };

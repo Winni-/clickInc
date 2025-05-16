@@ -20,7 +20,7 @@ import classNames from "classnames";
 const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
 interface CountryMapProps {
-  onCountryClick?: (geo: Feature, pos: { x: number; y: number }) => void;
+  onCountryClick?: (pos: { x: number; y: number }) => void;
   showOnlySelected?: boolean;
   scale?: number;
   className?: string;
@@ -94,7 +94,7 @@ export const CountryMap = ({
     }
     // Click on already selected country
     else if (country === name) {
-      onCountryClick?.(geo, clickPos);
+      onCountryClick?.(clickPos);
       setBounceKey(prev => prev + 1); // Increment key to restart animation
     }
     // Conquest click (if enabled)
@@ -120,7 +120,11 @@ export const CountryMap = ({
   };
 
   const handleFallback = () => {
-    dispatch(conquerCountry(mapEvents[0]?.targetCountry as string))
+    if (mapEvents.length > 0) {
+      mapEvents.forEach(event => {  
+        dispatch(conquerCountry(event?.targetCountry as string))
+      })
+    }
   }
 
   return (

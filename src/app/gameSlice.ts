@@ -79,7 +79,8 @@ const initialState: GameState = {
   talents: TALENTS.map(talent => ({
     id: talent.id,
     isVisible: false,
-    isAvailable: false
+    isAvailable: false,
+    state: talent.state,
   })),
   seed: Math.random(),
   clickEffects: {
@@ -92,6 +93,12 @@ const initialState: GameState = {
   newsQueue: [],
   activeNews: null,
   lastNewsTime: 0,
+  cosmicCivilization: {
+    FTL: false,
+    conquest: false,
+    planetShield: false,
+    shipShield: false,
+  }
 };
 
 const DEFAULT_CONFIG = {
@@ -198,13 +205,13 @@ const gameSlice = createSlice({
       
       if (talent) {
         applyTalentEffect(talent, state);
-        // Mark talent as active in its state
-        const talentIndex = TALENTS.findIndex(t => t.id === talentId);
-        if (talentIndex !== -1) {
-          TALENTS[talentIndex].state = 'active';
-          
+        const t = state.talents.find(t => t.id === talentId);
+        if(t) {
+          t.state = 'active';
           // Добавляем новость о разблокировке таланта
-          state.newsQueue.push('special-talent-unlocked');
+          if( talent.news ) {
+            state.newsQueue.push(talent.news);
+          }
         }
       }
     },
@@ -346,11 +353,15 @@ const gameSlice = createSlice({
         state.newsQueue.push(action.payload);
       }
     },
+    setStage: (state, action: PayloadAction<number>) => {
+      state.stage = action.payload;
+    },
   }
 });
 
 
 export const selectedCountry = (state: RootState) => state.game.selectedCountry;
+export const selectStage = (state: RootState) => state.game.stage;
 export const selectResources = (state: RootState) => state.game.resources;
 export const selectSpheres = (state: RootState) => state.game.spheres;
 export const selectUpgrades = (state: RootState) => state.game.upgrades;
@@ -364,6 +375,7 @@ export const selectActiveProblems = (state: RootState) => state.game.activeProbl
 export const selectMapEvents = (state: RootState) => state.game.mapEvents;
 export const selectTalents = (state: RootState) => state.game.talents;
 export const selectActiveNews = (state: RootState) => state.game.activeNews;
+export const selectTotal = (state: RootState) => state.game.total;
 export const { 
   manualClick, 
   buyUpgrade, 
@@ -382,7 +394,8 @@ export const {
   failProblem,
   showNews,
   hideNews,
-  addToNewsQueue
+  addToNewsQueue,
+  setStage
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

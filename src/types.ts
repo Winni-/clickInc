@@ -11,6 +11,7 @@ export interface StateTalent {
   id: string;
   isVisible?: boolean;
   isAvailable?: boolean;
+  state: 'locked' | 'unlocked' | 'active' | 'hidden';
 }
 
 export interface Talent extends StateTalent {
@@ -34,6 +35,7 @@ export interface Talent extends StateTalent {
   // Предрасчитанные значения для отображения и проверки доступности
   isVisible?: boolean;
   isAvailable?: boolean;
+  news?: string;
 }
 
 export interface Sphere {
@@ -145,6 +147,12 @@ export interface GameState {
     [entityType: string]: number;
   };
   total: number;
+  cosmicCivilization: {
+    FTL: boolean;
+    conquest: boolean;
+    planetShield: boolean;
+    shipShield: boolean;
+  }
 }
 
 export interface StateProject {

@@ -6,7 +6,9 @@ import {
   selectManualClickPower,
   selectResources,
   selectSpheres,
+  selectStage,
   selectedCountry,
+  setStage,
 } from "../../app/gameSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Shop } from "./shop";
@@ -15,8 +17,8 @@ import { CountryMap } from "../map/CountryMap";
 import { GOLD_COLORS } from "../../constants";
 import TalentTree from "../../components/TalentTree";
 import Projects from '../../components/Projects';
-import CountUp from '../../components/CountUp';
 import ResourcesHeader from "../../components/ResourcesHeader";
+import { Cosmos } from "./cosmos";
 
 // Компонент тултипа
 const Tooltip = ({ text }: { text: string }) => {
@@ -45,9 +47,8 @@ interface InterfaceProps {
 
 export const Step1 = ({ geo, clickPosition, isVisible = false }: InterfaceProps) => {
   const dispatch = useAppDispatch();
-  const resources = useAppSelector(selectResources);
-  const spheres = useAppSelector(selectSpheres);
   const selectedCountryName = useAppSelector(selectedCountry);
+  const stage = useAppSelector(selectStage);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const coinsContainerRef = useRef<HTMLDivElement>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -150,7 +151,7 @@ export const Step1 = ({ geo, clickPosition, isVisible = false }: InterfaceProps)
   }, []);
 
   // Обработчик клика по стране
-  const handleCountryClick = (geo: Feature, pos: { x: number; y: number }) => {
+  const handleCountryClick = (pos: { x: number; y: number }) => {
     setIsClicking(true);
     setTimeout(() => setIsClicking(false), 100);
     
@@ -178,6 +179,7 @@ export const Step1 = ({ geo, clickPosition, isVisible = false }: InterfaceProps)
     const animationId = requestAnimationFrame(drawParticles);
     return () => cancelAnimationFrame(animationId);
   }, [drawParticles]);
+
 
   // Задать размеры canvas при монтировании и изменении размера окна
   useEffect(() => {
@@ -220,9 +222,14 @@ export const Step1 = ({ geo, clickPosition, isVisible = false }: InterfaceProps)
       <header className={styles.header}>Развитие</header>
       <TalentTree />
     </div>
-    <div className={styles.mapContainer} ref={mapContainerRef}>
+    
+
+      <div className={styles.mapContainer} ref={mapContainerRef}>
       {selectedCountryName && (
         <>
+        {stage === 2 ? (
+          <Cosmos onEarthClick={handleCountryClick} />
+        ) : (
           <CountryMap
             onCountryClick={handleCountryClick}
             showOnlySelected={false}
@@ -231,6 +238,7 @@ export const Step1 = ({ geo, clickPosition, isVisible = false }: InterfaceProps)
             visible={finishedLoading}
             allowConquest={true}
           />
+        )}
           <canvas
             ref={canvasRef}
             className={styles.particlesCanvas}
@@ -261,6 +269,7 @@ export const Step1 = ({ geo, clickPosition, isVisible = false }: InterfaceProps)
         </>
       )}
     </div>
+
     <div className={styles.projects}>
       <header className={styles.header}>Проекты</header>
       <Projects />

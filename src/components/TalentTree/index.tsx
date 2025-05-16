@@ -256,8 +256,7 @@ const TalentTree: React.FC = () => {
       const foundTalent = talents.find(t => t.id === talent.id);
       return {
         ...talent,
-        isVisible: foundTalent?.isVisible || false,
-        isAvailable: foundTalent?.isAvailable || false,
+        ...foundTalent
       };
     });
   },[talents]);
@@ -291,7 +290,7 @@ const TalentTree: React.FC = () => {
             category={talent.category}
             icon={talent.icon}
             position={talent.position}
-            isVisible={talent.isVisible}
+            isVisible={talent.isVisible || false}
             isActive={talent.state === 'active'}
             isLocked={!talent.isAvailable}
             dependencyLinks={talent.meta?.dependencyLinks}

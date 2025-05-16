@@ -27,7 +27,7 @@ export const Problems: Record<string, Problem> = {
         description: 'Лобби против оружия, не хотят видеть огромную пушку, которую видно везде',
         icon: '🔫',
         position: 'random',
-        weight: 10,
+        weight: 3,
         amount: 50,
         time: 1000 * 25
     },
@@ -60,6 +60,55 @@ export const Problems: Record<string, Problem> = {
         weight: 10,
         amount: 200,
         time: 1000 * 250
+    },
+    'spice-explosion': {
+        id: 'spice-explosion',
+        name: 'Взрыв странного вещества',
+        description: 'Странное вещество взорвалось',
+        icon: '💥',
+        position: 'random',
+        weight: 10,
+        amount: 50,
+        time: 1000 * 60
+    },
+    'spice-empty': {
+        id: 'spice-empty',
+        name: 'Пустота',
+        description: 'Странное вещество это пустышка!',
+        icon: '💥',
+        position: 'random',
+        weight: 10,
+        amount: 20,
+        time: 1000 * 60
+    },
+    'cripper': {
+        id: 'cripper',
+        name: 'Криппер',
+        description: 'Что он тут делает?',
+        icon: '💥', 
+        position: 'random',
+        weight: 10,
+        amount: 200,
+        time: 1000 * 400
+    },
+    'collapse': {
+        id: 'collapse',
+        name: 'Схлопывание',
+        description: 'Ваш проект схлопывается под своим весом!',
+        icon: '💥',
+        position: 'random',
+        weight: 10,
+        amount: 200,
+        time: 1000 * 400
+    },
+    'big-collapse': {
+        id: 'big-collapse',
+        name: 'Схлопывание',
+        description: 'Ваш проект схлопывается под своим весом!',
+        icon: '💥',
+        position: 'random',
+        weight: 80,
+        amount: 20,
+        time: 1000 * 20
     }
-
 };

@@ -10,7 +10,7 @@ interface StartScreenProps {
 const StartScreen: React.FC<StartScreenProps> = ({ onResume, onNewGame, hasSave }) => {
   return (
     <div className={styles.startScreen}>
-      <h1>CklickInc.</h1>
+      <h1>ClickInc.</h1>
       <div className={styles.startButtons}>
         <button disabled={!hasSave} onClick={onResume}>Продолжить</button>
         <button onClick={onNewGame}>Новая игра</button>
