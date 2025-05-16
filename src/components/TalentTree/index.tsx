@@ -39,6 +39,7 @@ const Talent: React.FC<{
   position: [number, number];
   isVisible: boolean;
   isActive: boolean;
+  isShaded: boolean;
   isLocked: boolean;
   onClick: () => void;
   dependencyLinks?: Array<[number, number]>;
@@ -54,6 +55,7 @@ const Talent: React.FC<{
   isVisible, 
   isActive, 
   isLocked,
+  isShaded,
   onClick,
   dependencyLinks,
   onShowTooltip,
@@ -70,7 +72,8 @@ const Talent: React.FC<{
     styles.talent,
     { [styles.active]: isActive },
     { [styles.locked]: isLocked },
-    { [styles.unlocked]: !isLocked }
+    { [styles.unlocked]: !isLocked },
+    { [styles.shaded]: isShaded }
   );
 
   return (
@@ -292,6 +295,7 @@ const TalentTree: React.FC = () => {
             position={talent.position}
             isVisible={talent.isVisible || false}
             isActive={talent.state === 'active'}
+            isShaded={talent.isShaded || false}
             isLocked={!talent.isAvailable}
             dependencyLinks={talent.meta?.dependencyLinks}
             onClick={() => activateTalent(talent.id)}

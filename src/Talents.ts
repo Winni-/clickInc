@@ -5,6 +5,17 @@ import { Talent } from "./types";
 
 // one row is 500 resource
 
+// available classes:
+// .positive
+// .negative
+// .project
+// .cost
+// .economy-req
+// .science-req
+// .faith-req
+// .resource-req
+// .talent-name
+
 export const TALENTS: Talent[] = [
   {
     id: 'global-trader',
@@ -15,13 +26,15 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 1500, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 3000, (state) => state.stage < 2],
     icon: '🌐💰',
     effects: [
       (state) => { state.conquestSpeed += 0.10 },
     ],
     meta: {
-      
+      effectDesctription: 'Скорость завоевания <span class="positive">+10%</span>',
+      requirementsDescription: '<span class="science-req">3000</span> 🧬',
+      flavorText: 'Как и было предсказано Зальцманом.',
     }
   },
   {
@@ -33,12 +46,17 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 1500, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 4000, (state) => state.stage < 2],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 1000],
     icon: '🏦',
     effects: [
-      (state) => { state.autoClickPower += 0.10 },
+      (state) => { state.autoClickPower += 0.10 }, 
       (state) => { state.multipliers[COMMON] += 0.10 },
     ],
+    meta: {
+      effectDesctription: 'Добыча ₿ <span class="positive">+10%</span>',
+      requirementsDescription: '<span class="economy-req">4000</span> 💸',
+    }
   },
   {
     id: 'infrastructure-magnate',
@@ -49,7 +67,8 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 2500, (state) => state.stage < 2],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 3000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 5000, (state) => state.stage < 2],
     icon: '👌',
     effects: [
       (state) => { state.projectSpeed += 0.20 }
@@ -64,7 +83,8 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 3500, (state) => state.stage < 2],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 4000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 7000, (state) => state.stage < 2],
     icon: '💸',
     effects: [
       (state) => { state.multipliers[FAITH] += 0.10 },
@@ -80,7 +100,8 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 4500, (state) => state.stage < 2],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 2000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 5000, (state) => state.stage < 2],
     icon: '🧬',
     effects: [
       (state) => { state.multipliers[SCIENCE] += 0.20 }
@@ -95,7 +116,8 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 5500, (state) => state.stage < 2],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 6000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 11000, (state) => state.stage < 2],
     icon: '🧬',
     effects: [
       (state) => { state.activeProjects.push({id: 'new-material', status: 'in_progress', progress: 0}) }
@@ -112,7 +134,8 @@ export const TALENTS: Talent[] = [
     }],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 6000, (state) => state.stage < 2],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 10000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 12000, (state) => state.stage < 2],
     icon: '🏦',
     effects: [
       (state) => { state.autoClickPower += 200 },
@@ -128,12 +151,14 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 6500, (state) => state.stage < 2],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 9000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 13000, (state) => state.stage < 2],
     icon: '🧬',
     effects: [
       (state) => { state.multipliers[ECONOMY] += 0.20 },
       (state) => { state.multipliers[FAITH] += 0.20 },
       (state) => { state.multipliers[SCIENCE] += 0.20 },
+      (state) => { state.conquestSpeed += 0.50 },
     ],
     meta: {
       isCrossCategory: true,
@@ -147,8 +172,9 @@ export const TALENTS: Talent[] = [
     position: [2, 15],
     requires: [],
     state: 'locked',
-    visible: [ () => true],
-    available: [ (state) => state.spheres[ECONOMY].resources >= 7500, (state) => state.stage < 2],
+    visible: [ (state) => state.spheres[ECONOMY].resources >= 9000],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 12000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 15000, (state) => state.stage < 2],
     icon: '💂‍♀️🧬',
     effects: [
       (state) => { state.activeProjects.push({id: 'antiair-gun', status: 'in_progress', progress: 0}) },
@@ -163,6 +189,30 @@ export const TALENTS: Talent[] = [
     ],
   },
   {
+    id: 'Brutal-force',
+    name: 'Brutal Force',
+    description: 'Перед вами трепещут от вашей силы, несколько стран идут к вам добровольно',
+    category: ECONOMY,
+    position: [2, 25],
+    requires: [],
+    state: 'locked',
+    visible: [ (state) => state.spheres[ECONOMY].resources >= 10000],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 16000],
+    available: [ (state) => state.spheres[ECONOMY].resources >= 25000, (state) => state.stage < 2],
+    icon: '💪',
+    effects: [
+      (state) => { state.conquestSpeed += 0.50 },
+      (state) => { state.multipliers[SCIENCE] -= 0.50 },
+      (state) => { 
+        state.conqueredCountries.push(
+          ...COUNTRY_NAMES.filter(
+            (country) => !state.conqueredCountries.includes(country)
+          ).slice(0, Math.floor(Math.random() * 45)+5) // 5-50 стран
+        )
+       },
+    ],
+  },
+  {
     id: 'cold-fission',
     name: 'Cold Fission',
     description: 'Вы открываете холодный ядерный синтез',
@@ -172,9 +222,10 @@ export const TALENTS: Talent[] = [
       talentId: 'new-material',
     }],
     state: 'locked',
-    visible: [ () => true],
+    visible: [ (state) => state.spheres[ECONOMY].resources >= 14000],
+    shade: [ (state) => state.spheres[ECONOMY].resources < 16000],
     available: [ 
-      (state) => state.spheres[ECONOMY].resources >= 10000,
+      (state) => state.spheres[ECONOMY].resources >= 20000,
       (state) => state.spheres[SCIENCE].resources >= 10000,
       (state) => state.stage < 2,
     ],
@@ -188,19 +239,35 @@ export const TALENTS: Talent[] = [
     }
   },
   {
-    id: 'defensive-swarm',
-    name: 'Defensive Swarm',
-    description: 'Создать рой из спутников на орбите, для защиты от атаки. -1000₿',
+    id: 'science-freak',
+    name: 'Science Freak',
+    description: 'Наука это наш путь к победе',
     category: SCIENCE,
     position: [4, 2],
     requires: [],
     state: 'locked',
     visible: [ () => true],
+    available: [ (state) => state.spheres[SCIENCE].resources >= 2000, (state) => state.stage < 2],
+    icon: '🧬',
+    effects: [
+      (state) => { state.multipliers[SCIENCE] += 0.50 },
+    ],
+  },
+  {
+    id: 'defensive-swarm',
+    name: 'Defensive Swarm',
+    description: 'Создать рой из спутников на орбите, для защиты от атаки. -1000₿',
+    category: SCIENCE,
+    position: [4, 10],
+    requires: [],
+    state: 'locked',
+    visible: [ () => true],
     available: [ 
-      (state) => state.spheres[SCIENCE].resources >= 1000,
+      (state) => state.spheres[SCIENCE].resources >= 10000,
       (state) => state.resources >= 1000,
       (state) => state.stage < 2,
     ],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 2000],
     icon: '🛰',
     effects: [
       (state) => { state.resources -= 1000 },
@@ -214,14 +281,15 @@ export const TALENTS: Talent[] = [
     name: 'Dyson Swarm',
     description: 'Создать рой из спутников, вокруг Солнца.',
     category: SCIENCE,
-    position: [4, 4],
+    position: [4, 14],
     requires: [],
     state: 'locked',
     visible: [ () => true],
     available: [ 
-      (state) => state.spheres[SCIENCE].resources >= 2000,
+      (state) => state.spheres[SCIENCE].resources >= 14000,
       (state) => state.stage < 2,
     ],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 4500],
     icon: '🛰',
     effects: [
       (state) => { state.activeProjects.push({id: 'dyson-swarm', status: 'in_progress', progress: 0}) }
@@ -232,14 +300,15 @@ export const TALENTS: Talent[] = [
     name: 'Dyson Circle',
     description: 'Создать кольцо из спутников, вокруг Солнца.',
     category: SCIENCE,
-    position: [4, 6],
+    position: [4, 18],
     requires: [{
       talentId: 'dyson-swarm',
     }],
     state: 'locked',
-    visible: [ (state) => state.spheres[SCIENCE].resources >= 2000],
+    visible: [ (state) => state.spheres[SCIENCE].resources >= 5000],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 1300],
     available: [ 
-      (state) => state.spheres[SCIENCE].resources >= 4000,
+      (state) => state.spheres[SCIENCE].resources >= 18000,
       (state) => state.stage < 2,
     ],
     icon: '🛰',
@@ -252,14 +321,15 @@ export const TALENTS: Talent[] = [
     name: 'Dyson Sphere',
     description: 'Создать сферу из спутников, вокруг Солнца.',
     category: SCIENCE,
-    position: [4, 8],
+    position: [4, 22],
     requires: [{
       talentId: 'dyson-circle',
     }],
     state: 'locked',
-    visible: [ (state) => state.spheres[SCIENCE].resources >= 4000],
+    visible: [ (state) => state.spheres[SCIENCE].resources >= 9000],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 17000],
     available: [ 
-      (state) => state.spheres[SCIENCE].resources >= 8000,
+      (state) => state.spheres[SCIENCE].resources >= 22000,
       (state) => state.resources >= 10000,
       (state) => state.stage < 2,
     ],
@@ -313,11 +383,128 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[SCIENCE].resources >= 10000, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[SCIENCE].resources >= 12000, (state) => state.stage < 2],
     icon: '🧊',
     effects: [
       (state) => { state.resources += 7000 },
     ],
+  },
+  {
+    id: 'science-freak2',
+    name: 'Science Freak lvl2',
+    description: 'Только наука может спасти нас',
+    category: SCIENCE,
+    position: [4, 26],
+    requires: [],
+    state: 'locked',
+    visible: [ (state) => state.spheres[SCIENCE].resources >= 12000],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 20000],
+    available: [ (state) => state.spheres[SCIENCE].resources >= 26000, (state) => state.stage < 2],
+    icon: '🧬',
+    effects: [
+      (state) => { state.multipliers[SCIENCE] += 0.50 },
+      (state) => { state.spheres[FAITH].resources > 10000 && (state.spheres[FAITH].resources -= 5000)  },
+      (state) => { state.spheres[ECONOMY].resources > 10000 && (state.spheres[ECONOMY].resources -= 5000)  },
+    ],
+  },
+  {
+    id: 'human-experiment',
+    name: 'Human Experiment',
+    description: 'Разрешить ученым проводить эксперименты на людях',
+    category: SCIENCE,
+    position: [4, 28],
+    requires: [],
+    state: 'locked',
+    visible: [ (state) => state.spheres[SCIENCE].resources >= 15000],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 22000],
+    available: [ (state) => state.spheres[SCIENCE].resources >= 28000, (state) => state.stage < 2],
+    icon: '🧬',
+    effects: [
+      (state) => { state.multipliers[SCIENCE] += 0.50 },
+      (state) => { state.projectSpeed += 2 },
+      (state) => { state.conquestSpeed += 2 },
+      (state) => { state.manualClickPower *= 2 },
+      (state) => { state.autoClickPower *= 2 },
+      (state) => { state.spheres[FAITH].resources > 10000 && (state.spheres[FAITH].resources -= 5000)  },
+      (state) => { state.multipliers[ECONOMY] -= 0.50 },
+    ],
+    meta: {
+      effectDesctription: 'Наука <span class="positive">+50%</span>,<br />скорость проектов <span class="positive">+ х2</span>,<br /> скорость завоевания <span class="positive">+ х2</span>,<br /> клики <span class="positive">х2</span>,<br /> экономика <span class="negative">-50%</span>,<br /> вера <span class="positive">+50%</span>',
+      requirementsDescription: '<span class="science-req">28000<span>🧬',
+      flavorText: 'Это может привести к гибели многих людей, но в скором времени мы сможем спасти их всех',
+    }
+  },
+  {
+    id: 'robots',
+    name: 'Robots',
+    description: 'Последнее слово робототехники',
+    category: SCIENCE,
+    position: [4, 35],
+    requires: [],
+    state: 'locked',
+    visible: [ (state) => state.spheres[SCIENCE].resources >= 25000],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 31000],
+    available: [ (state) => state.spheres[SCIENCE].resources >= 35000,
+     (state) => state.spheres[ECONOMY].resources >= 10000,
+     (state)=>state.resources > 10000,
+      (state) => state.stage < 2
+    ],
+    icon: '🤖',
+    effects: [
+      (state) => { state.projectSpeed += 2 },
+    ],
+    meta: {
+      effectDesctription: 'Скорость проектов <span class="positive">+2</span>',
+      requirementsDescription: '<span class="science-req">35000<span>🧬, <br /> <span class="economy-req">10000<span>💸, <br /> <span class="resources-req">10000<span>💰',
+      flavorText: 'Тут нам не обойтись без денег',
+    }
+  },
+  // При 75% науки, таланты смещаются в веру и требуют столько же веры
+  {
+    id: 'summon-knowledge',
+    name: 'Summon Knowledge',
+    description: 'Призвать знания из неизвестных источников',
+    category: SCIENCE,
+    position: [5, 38],
+    requires: [],
+    state: 'locked',
+    visible: [ (state) => state.spheres[SCIENCE].resources >= 35000, (state) => state.spheres[FAITH].resources >= 35000],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 41000],
+    available: [ (state) => state.spheres[FAITH].resources >= 38000, (state) => state.spheres[FAITH].resources >= 38000, (state) => state.stage < 2],
+    icon: '🧬',
+    effects: [
+      (state) => { state.multipliers[SCIENCE] += 0.50 },
+      (state) => { state.multipliers[FAITH] += 0.50 },
+      (state) => { state.multipliers[ECONOMY] -= 0.50 },
+      (state) => { state.projectSpeed += [10,100,1000][Math.floor(Math.random() * 3)] },
+    ],
+    meta: {
+      effectDesctription: 'Наука <span class="positive">+50%</span>,<br />Вера <span class="positive">+50%</span>,<br />Экономика <span class="negative">-50%</span>,<br />Скорость проектов <span class="positive">+10-100-1000</span>',
+      requirementsDescription: '<span class="science-req">35000<span>🧬, <br /> <span class="faith-req">35000<span>🙏🏻',
+      flavorText: 'Это оно?',
+    }
+  },
+  {
+    id: 'quark-control',
+    name: 'Quark Control',
+    description: 'Эксперименты в коллайдеры принесли свои плоды, мы можем создавать любую материю, которая нам нужна',
+    category: SCIENCE,
+    position: [5, 40],
+    requires: [ {
+      talentId: 'new-materials',
+    }],
+    state: 'locked',
+    visible: [ (state) => state.spheres[SCIENCE].resources >= 35000, (state) => state.spheres[FAITH].resources >= 35000],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 40000],
+    available: [ (state) => state.spheres[SCIENCE].resources >= 40000, (state) => state.spheres[FAITH].resources >= 40000, (state) => state.stage < 2],
+    icon: '🧬',
+    effects: [
+      (state) => { state.projectSpeed *= 2 },
+    ],
+    meta: {
+      effectDesctription: 'Скорость проектов <span class="positive">х2</span>',
+      requirementsDescription: '<span class="science-req">40000<span>🧬, <br /> <span class="faith-req">40000<span>🙏🏻',
+    }
   },
   {
     id: 'elexir-of-undying',
@@ -328,6 +515,7 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ (state) => state.spheres[FAITH].resources >= 3000 && state.spheres[SCIENCE].resources >= 3000 && state.spheres[ECONOMY].resources <= 4500],
+    shade: [ (state) => state.spheres[SCIENCE].resources < 10000],
     available: [ (state) => state.spheres[SCIENCE].resources >= 18000, (state) => state.stage < 2],
     icon: '🧊',
     effects: [
@@ -345,7 +533,7 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[FAITH].resources >= 1000, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[FAITH].resources >= 2000, (state) => state.stage < 2],
     icon: '🙏🏻',
     effects: [
       (state) => { 
@@ -362,7 +550,7 @@ export const TALENTS: Talent[] = [
     requires: [],
     state: 'locked',
     visible: [ () => true],
-    available: [ (state) => state.spheres[FAITH].resources >= 3000, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[FAITH].resources >= 6000, (state) => state.stage < 2],
     icon: '🧬',
     effects: [
       (state) => { state.activeProjects.push({id: 'research-artifact', status: 'in_progress', progress: 0}) }
@@ -378,7 +566,7 @@ export const TALENTS: Talent[] = [
     state: 'locked',
     visible: [ () => true],
     available: [ 
-      (state) => state.spheres[FAITH].resources >= 4000,
+      (state) => state.spheres[FAITH].resources >= 8000,
       (state) => state.spheres[SCIENCE].resources >= 4000,
       (state) => state.stage < 2,
     ],
@@ -400,7 +588,7 @@ export const TALENTS: Talent[] = [
     visible: [ (state) => {
       return !!state.secondStage.find((item) => item.id === 'contact');
     }],
-    available: [ (state) => state.spheres[FAITH].resources >= 6000, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[FAITH].resources >= 12000, (state) => state.stage < 2],
     icon: '🧊',
     effects: [
       (state) => { state.multipliers[FAITH] += 0.50 },
@@ -426,7 +614,7 @@ export const TALENTS: Talent[] = [
       }
       return state.seed < 0.05;
     }],
-    available: [ (state) => state.spheres[FAITH].resources >= 11000, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[FAITH].resources >= 22000, (state) => state.stage < 2],
     icon: '🚀',
     effects: [
       (state) => { state.secondStage.push({
@@ -448,7 +636,7 @@ export const TALENTS: Talent[] = [
     visible: [ (state) => {
       return state.seed > 0.05 && state.seed < 0.25;
     }],
-    available: [ (state) => state.spheres[FAITH].resources >= 12000, (state) => state.stage < 2],
+    available: [ (state) => state.spheres[FAITH].resources >= 24000, (state) => state.stage < 2],
     icon: '🔥',
     effects: [
       (state) => { 
@@ -474,7 +662,7 @@ export const TALENTS: Talent[] = [
       (state) => state.spheres[SCIENCE].resources >= 1000,
     ],
     available: [ 
-      (state) => state.spheres[SCIENCE].resources >= 11000,
+      (state) => state.spheres[SCIENCE].resources >= 22000,
       (state) => state.spheres[ECONOMY].resources >= 5000,
       (state) => state.spheres[ECONOMY].resources <= 20000,
       (state) => state.spheres[FAITH].resources >= 5000,
@@ -495,7 +683,7 @@ export const TALENTS: Talent[] = [
     name: 'Nanoshield',
     description: 'Разработать щит, защищающий корабль от опасностей при быстром перемещении',
     category: SCIENCE,
-    position: [4, 26],
+    position: [4, 55],
     requires: [],
     state: 'locked',
     visible: [ (state) => {
@@ -516,7 +704,7 @@ export const TALENTS: Talent[] = [
     name: 'Spice Shield',
     description: 'Разработать щит, защищающий корабль от опасностей при быстром перемещении',
     category: FAITH,
-    position: [6, 28],
+    position: [6, 55],
     requires: [],
     state: 'locked',  
     visible: [ (state) => {
@@ -541,7 +729,7 @@ export const TALENTS: Talent[] = [
     name: 'Genetic Memory',
     description: 'Благодаря специи, ваши провидцы извлекают знания предков',
     category: FAITH,
-    position: [6, 32],
+    position: [6, 60],
     requires: [],
     state: 'locked',
     visible: [ (state) => {
@@ -561,7 +749,7 @@ export const TALENTS: Talent[] = [
     name: 'Foresight',
     description: 'Вы можете предвидеть будущие проблемы',
     category: FAITH,
-    position: [6, 34],  
+    position: [6, 65],  
     requires: [],
     state: 'locked',
     visible: [ (state) => {
@@ -581,7 +769,7 @@ export const TALENTS: Talent[] = [
     name: 'Quantum Beacon',
     description: 'Вы можете создавать квантовые порталы',
     category: SCIENCE,
-    position: [4, 36],
+    position: [4, 70],
     requires: [],
     state: 'locked',
     visible: [ (state) => {
@@ -605,7 +793,7 @@ export const TALENTS: Talent[] = [
     name: 'Space Folding Engine',
     description: 'Разработка двигателя, позволяющего перемещаться быстрее скорости света',
     category: SCIENCE,
-    position: [4, 38],
+    position: [4, 75],
     requires: [],
     state: 'locked',
     visible: [ (state) => {
@@ -628,7 +816,7 @@ export const TALENTS: Talent[] = [
     name: 'Чревоточина',
     description: 'Ваши разработки позволяют нам создать одну чревоточину, сразу до планеты врага! Так можно обойтись без щитов. Но у нас одна попытка!',
     category: ECONOMY,
-    position: [2, 33],
+    position: [2, 55],
     requires: [
       {
         talentId: 'cold-fission', 
@@ -655,7 +843,7 @@ export const TALENTS: Talent[] = [
     name: 'Складывание пространства от планеты к планете',
     description: 'Ваши разработки позволяют нам создать изменить пространство, мы сможем попасть к ним даже без короблей! Но у нас одна попытка!',
     category: ECONOMY,
-    position: [2, 34],
+    position: [2, 55],
     requires: [
       {
         talentId: 'cold-fission', 
@@ -682,7 +870,7 @@ export const TALENTS: Talent[] = [
     name: 'Портал в неизвестность',
     description: 'Вы можете открывать порталы в другое измерение, чтобы перемещаться между планетами',
     category: FAITH,
-    position: [6, 35],
+    position: [6, 55],
     requires: [],
     state: 'locked',
     visible: [ (state) => {
@@ -708,7 +896,7 @@ export const TALENTS: Talent[] = [
     name: 'Сотрудничество с инопланетянами',
     description: 'Взаимодействие с инопланетянами оказывает плодотворный эффект',
     category: FAITH,
-    position: [6, 45],
+    position: [6, 90],
     requires: [],
     state: 'locked',
     visible: [ (state) => {
@@ -730,7 +918,7 @@ export const TALENTS: Talent[] = [
     name: 'Священный щит',
     description: 'Из подвалов Антиохии, вышли священники, заявляют что могут создать щит, защищающий любой корабль от космического мусора и излучения',
     category: FAITH,
-    position: [6, 36],
+    position: [6, 85],
     requires: [],
     state: 'locked',
     visible: [ (state) => state.spheres[FAITH].resources >= 55000],

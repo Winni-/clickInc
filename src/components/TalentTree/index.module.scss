@@ -108,6 +108,13 @@
     filter: brightness(1) !important;
     cursor: pointer !important;
   }
+
+  &.shaded {
+    background: black;
+    pointer-events: none;
+    opacity: 0.8;
+    filter: grayscale(1) brightness(0.2) blur(3px);
+  }
 }
 
 .iconContainer {
@@ -361,7 +368,6 @@
   font-style: italic;
   margin-top: 8px;
   padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tooltipRequirements {
@@ -394,3 +400,10 @@
 .lockedStatus {
   color: #ff6666;
 } 
+
+.tooltipFlavorText {
+  font-size: 11px;
+  margin-top: 8px;
+  color: var(--gunmetal);
+  font-style: italic;
+}

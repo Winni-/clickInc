@@ -66,79 +66,7 @@ export const UPGRADES: Upgrade[] = [
       linearIncrement: 500,
       transitionLevel: 50 },
     
-    // === SCIENCE АПГРЕЙДЫ ===
-    { id: 'lab',
-      level: 0,
-      visible: true, // Базовый апгрейд науки, всегда видимый
-      spheres: [SCIENCE],
-      available: true,
-      name: 'Lab',
-      icon: '🧪',
-      cost: 15, // Базовая стоимость
-      growthRate: 1.15,
-      CPS: 0.2,
-      linearIncrement: 500,
-      transitionLevel: 50 },
-    { id: 'satellite',
-      level: 0,
-      visible: (state: GameState) => {
-        return state.resources >= 75 - 15 &&
-        state.spheres[SCIENCE].resources >= 75 - 15 
-      }, // 5 * 15 (стоимость lab)
-      spheres: [SCIENCE],
-      available: true,
-      name: 'Satellite',
-      icon: '🛰️',
-      cost: 120, // 2.5 * 15
-      growthRate: 1.15,
-      CPS: 0.5,
-      linearIncrement: 500,
-      transitionLevel: 50 },
-    { id: 'ai_core',
-      level: 0,
-      visible: (state: GameState) => {
-        return state.resources >= 190 - 38 &&
-        state.spheres[SCIENCE].resources >= 190 - 38
-      }, // 5 * 38 (стоимость satellite)
-      spheres: [SCIENCE],
-      available: true,
-      name: 'AI Core',
-      icon: '🧠',
-      cost: 300, // 2.5 * 38
-      growthRate: 1.15,
-      CPS: 1.3,
-      linearIncrement: 500,
-      transitionLevel: 50 },
-    { id: 'quantum_computer',
-      level: 0,
-      visible: (state: GameState) => {
-        return state.resources >= 475 - 95 &&
-        state.spheres[SCIENCE].resources >= 475 - 95
-      }, // 5 * 95 (стоимость ai_core)
-      spheres: [SCIENCE],
-      available: true,
-      name: 'Quantum Computer',
-      icon: '💻',
-      cost: 400, // 2.5 * 95
-      growthRate: 1.15,
-      CPS: 3.2,
-      linearIncrement: 500,
-      transitionLevel: 50 },
-    { id: 'space_telescope',
-      level: 0,
-      visible: (state: GameState) => {
-        return state.resources >= 1190 - 238 &&
-        state.spheres[SCIENCE].resources >= 1190 - 238
-      }, // 5 * 238 (стоимость quantum_computer)
-      spheres: [SCIENCE],
-      available: true,
-      name: 'Space Telescope',
-      icon: '🔭',
-      cost: 1000, // 2.5 * 238
-      growthRate: 1.15,
-      CPS: 8,
-      linearIncrement: 500,
-      transitionLevel: 50 },
+    
     
     // === ECONOMY АПГРЕЙДЫ ===
     { id: 'market',
@@ -211,6 +139,80 @@ export const UPGRADES: Upgrade[] = [
       cost: 1700, // 2.5 * 312
       growthRate: 1.15,
       CPS: 12.5,
+      linearIncrement: 500,
+      transitionLevel: 50 },
+
+      // === SCIENCE АПГРЕЙДЫ ===
+    { id: 'lab',
+      level: 0,
+      visible: true, // Базовый апгрейд науки, всегда видимый
+      spheres: [SCIENCE],
+      available: true,
+      name: 'Lab',
+      icon: '🧪',
+      cost: 15, // Базовая стоимость
+      growthRate: 1.15,
+      CPS: 0.2,
+      linearIncrement: 500,
+      transitionLevel: 50 },
+    { id: 'satellite',
+      level: 0,
+      visible: (state: GameState) => {
+        return state.resources >= 75 - 15 &&
+        state.spheres[SCIENCE].resources >= 75 - 15 
+      }, // 5 * 15 (стоимость lab)
+      spheres: [SCIENCE],
+      available: true,
+      name: 'Satellite',
+      icon: '🛰️',
+      cost: 120, // 2.5 * 15
+      growthRate: 1.15,
+      CPS: 0.5,
+      linearIncrement: 500,
+      transitionLevel: 50 },
+    { id: 'ai_core',
+      level: 0,
+      visible: (state: GameState) => {
+        return state.resources >= 190 - 38 &&
+        state.spheres[SCIENCE].resources >= 190 - 38
+      }, // 5 * 38 (стоимость satellite)
+      spheres: [SCIENCE],
+      available: true,
+      name: 'AI Core',
+      icon: '🧠',
+      cost: 300, // 2.5 * 38
+      growthRate: 1.15,
+      CPS: 1.3,
+      linearIncrement: 500,
+      transitionLevel: 50 },
+    { id: 'quantum_computer',
+      level: 0,
+      visible: (state: GameState) => {
+        return state.resources >= 475 - 95 &&
+        state.spheres[SCIENCE].resources >= 475 - 95
+      }, // 5 * 95 (стоимость ai_core)
+      spheres: [SCIENCE],
+      available: true,
+      name: 'Quantum Computer',
+      icon: '💻',
+      cost: 400, // 2.5 * 95
+      growthRate: 1.15,
+      CPS: 3.2,
+      linearIncrement: 500,
+      transitionLevel: 50 },
+    { id: 'space_telescope',
+      level: 0,
+      visible: (state: GameState) => {
+        return state.resources >= 1190 - 238 &&
+        state.spheres[SCIENCE].resources >= 1190 - 238
+      }, // 5 * 238 (стоимость quantum_computer)
+      spheres: [SCIENCE],
+      available: true,
+      name: 'Space Telescope',
+      icon: '🔭',
+      cost: 1000, // 2.5 * 238
+      growthRate: 1.15,
+      CPS: 8,
       linearIncrement: 500,
       transitionLevel: 50 },
     

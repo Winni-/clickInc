@@ -114,58 +114,97 @@
       position: absolute;
       z-index: 2;
       pointer-events: none;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
       
       &.element1 {
-        top: 20%;
-        left: 15%;
-        width: 150px;
-        height: 150px;
-        opacity: 0.6;
+
         transform: translate3d(0, 0, 0);
-        transition: transform 0.1s ease-out;
+        transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
       }
       
       &.element2 {
-        bottom: 30%;
-        right: 20%;
-        width: 100px;
-        height: 100px;
-        opacity: 0.4;
+
         transform: translate3d(0, 0, 0);
-        transition: transform 0.15s ease-out;
+        transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
       }
       
       &.element3 {
-        top: 40%;
-        right: 30%;
-        width: 80px;
-        height: 80px;
-        opacity: 0.5;
+
         transform: translate3d(0, 0, 0);
-        transition: transform 0.2s ease-out;
+        transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
       }
     }
     
-    img {
-      display: none; // Скрываем img, так как используем background-image
-    }
   }
   
   .firstScreen {
     opacity: 1;
-    z-index: 2;
+    z-index: 0;
     
     &::before {
-      background-image: url('../../assets/oumua.jpg');
+      background-image: url('../../assets/intro/back.jpg');
     }
+    .element3 {
+      background-image: url('../../assets/intro/comet.png');
+      width: 70%;
+      top: 15%;
+      left: 10%;
+      height: auto;
+      min-height: 50vh;
+      z-index: 3;
+    }
+    .element2 {
+      background-image: url('../../assets/intro/small.png');
+      z-index: 1;
+      width: 2vw;
+      height: 2vw;
+      top: 10%;
+      left: 15%;
+      
+    } 
+    .element1 {
+      background-image: url('../../assets/intro/big.png');
+      width: 50%;
+      top: 0;
+      right: -10%;
+      height: 100%;
+      z-index: 1;
+    }
+
   }
   
   .secondScreen {
     opacity: 0;
-    z-index: 1;
+    z-index: 0;
     
     &::before {
-      background-image: url('../../assets/Pluton.jpg');
+      background-image: url('../../assets/intro/back.jpg');
+    }
+    .element1 {
+      background-image: url('../../assets/intro/Pluto.png');
+      width: 60%;
+      top: 12%;
+      right: 5%;
+      height: 70%;
+      z-index: 1;
+    }
+    .element2 {
+      background-image: url('../../assets/intro/smallstat.png');
+      width: 3vw;
+      height: 3vw;
+      top: 10%;
+      left: 15%;
+      z-index: 1;
+    } 
+    .element3 {
+      background-image: url('../../assets/intro/BigStar.png');
+      width: 10vw;
+      height: 10vw;
+      bottom: 10%;
+      right: 5%;
+      z-index: 1;
     }
   }
   

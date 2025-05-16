@@ -11,6 +11,7 @@ export interface StateTalent {
   id: string;
   isVisible?: boolean;
   isAvailable?: boolean;
+  isShaded?: boolean;
   state: 'locked' | 'unlocked' | 'active' | 'hidden';
 }
 
@@ -26,11 +27,15 @@ export interface Talent extends StateTalent {
   state: 'locked' | 'unlocked' | 'active' | 'hidden';
   visible: Condition[];
   available: Condition[];
+  shade?: Condition[];
   effects: Effect[];
   icon: string;
   meta?: {
     isCrossCategory?: boolean;
     dependencyLinks?: Array<[number, number]>;
+    effectDesctription?: string;
+    requirementsDescription?: string;
+    flavorText?: string;
   };
   // Предрасчитанные значения для отображения и проверки доступности
   isVisible?: boolean;

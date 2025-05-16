@@ -1,7 +1,5 @@
 import React, { FC, useEffect, useState, useRef } from 'react';
 import styles from './Cutscenes.module.scss';
-import intro from '../../assets/oumua.jpg';
-import explosion from '../../assets/Pluton.jpg';
 
 // Глобальные переменные для хранения состояния между ремаунтами
 // Это НЕ хранилище таймеров, а только состояние для одного компонента
@@ -24,10 +22,78 @@ const IntroCutscene: FC<IntroCutsceneProps> = ({ onComplete, isPaused = false })
   const cutsceneRef = useRef<HTMLDivElement>(null);
   const firstTimerRef = useRef<NodeJS.Timeout | null>(null);
   const completeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const animationStartTimeRef = useRef<number>(0);
+  const pausedTimeRef = useRef<number>(0);
   
   // Константы для времени
   const FIRST_SCREEN_DURATION = 10000; // 10 секунд до смены экрана
   const TOTAL_DURATION = 20000; // 20 секунд до завершения
+  const PARALLAX_ANIMATION_DURATION = 10000; // 10 секунд для полной анимации параллакса
+  
+  // Функция для запуска и обновления анимации параллакса
+  const startParallaxAnimation = () => {
+    // Сначала очищаем предыдущую анимацию, если она есть
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    
+    // Сбрасываем время начала анимации
+    animationStartTimeRef.current = Date.now() - pausedTimeRef.current;
+    
+    const updateParallax = () => {
+      if (!cutsceneRef.current || isPaused) {
+        return;
+      }
+      
+      const now = Date.now();
+      const elapsedTime = now - animationStartTimeRef.current;
+      
+      // Рассчитываем прогресс анимации от 0 до 1 за 10 секунд
+      // Полный цикл = 20 секунд (10 секунд туда, 10 секунд обратно)
+      // Используем Math.floor для определения текущего цикла
+      const fullCycleDuration = PARALLAX_ANIMATION_DURATION * 2;
+      const cycleTime = elapsedTime % fullCycleDuration;
+      
+      // Определяем направление движения (первые 10 секунд - прямое, вторые 10 - обратное)
+      let normalizedProgress: number;
+      if (cycleTime < PARALLAX_ANIMATION_DURATION) {
+        // Движение в прямом направлении (0 -> 1) за первые 10 секунд
+        normalizedProgress = cycleTime / PARALLAX_ANIMATION_DURATION;
+      } else {
+        // Движение в обратном направлении (1 -> 0) за следующие 10 секунд
+        normalizedProgress = (fullCycleDuration - cycleTime) / PARALLAX_ANIMATION_DURATION;
+      }
+      
+      // Определяем текущий экран
+      const screenSelector = showSecond ? `.${styles.secondScreen}` : `.${styles.firstScreen}`;
+      const elements = cutsceneRef.current.querySelectorAll(`${screenSelector} .${styles.parallaxElement}`);
+      
+      // Максимальные смещения
+      const maxOffsetX = 100;
+      const maxOffsetY = 50;
+      
+      // Применяем разные значения смещения для разных элементов
+      elements.forEach((element, index) => {
+        // Для четных индексов движение вниз-вправо, для нечетных - вверх-влево
+        const direction = index % 2 === 0 ? 1 : -1;
+        const multiplier = (index + 1) * 0.8;
+        
+        // Вычисляем текущие координаты для смещения
+        const x = direction * normalizedProgress * maxOffsetX * multiplier;
+        const y = direction * normalizedProgress * maxOffsetY * multiplier;
+        
+        (element as HTMLElement).style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      });
+      
+      // Запланировать следующий кадр анимации
+      animationFrameRef.current = requestAnimationFrame(updateParallax);
+    };
+    
+    // Запускаем анимацию
+    animationFrameRef.current = requestAnimationFrame(updateParallax);
+  };
   
   // Обработка паузы и ремаунта
   useEffect(() => {
@@ -53,6 +119,15 @@ const IntroCutscene: FC<IntroCutsceneProps> = ({ onComplete, isPaused = false })
           clearTimeout(completeTimerRef.current);
           completeTimerRef.current = null;
         }
+        
+        // Останавливаем анимацию параллакса
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+          animationFrameRef.current = null;
+          
+          // Запоминаем временную позицию анимации
+          pausedTimeRef.current = Date.now() - animationStartTimeRef.current;
+        }
       } else {
         // Заканчиваем паузу
         if (introState.pauseStart > 0) {
@@ -63,14 +138,24 @@ const IntroCutscene: FC<IntroCutsceneProps> = ({ onComplete, isPaused = false })
         
         // Планируем следующие шаги
         planNextSteps();
+        
+        // Возобновляем анимацию параллакса
+        if (!animationFrameRef.current) {
+          startParallaxAnimation();
+        }
       }
     } else if (!isPaused && !introState.completed) {
       // Планируем следующие шаги при первом монтировании или ремаунте без паузы
       planNextSteps();
+      
+      // Запускаем анимацию параллакса при первом монтировании
+      if (!animationFrameRef.current) {
+        startParallaxAnimation();
+      }
     }
     
     return () => {
-      // Очищаем таймеры при размонтировании
+      // Очищаем таймеры и анимации при размонтировании
       if (firstTimerRef.current) {
         clearTimeout(firstTimerRef.current);
         firstTimerRef.current = null;
@@ -80,9 +165,22 @@ const IntroCutscene: FC<IntroCutsceneProps> = ({ onComplete, isPaused = false })
         clearTimeout(completeTimerRef.current);
         completeTimerRef.current = null;
       }
+      
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
     };
-  }, [isPaused, onComplete]);
+  }, [isPaused]);
   
+  // Эффект для отслеживания изменения экрана и обновления анимации
+  useEffect(() => {
+    // Перезапускаем анимацию при смене экрана
+    if (!isPaused) {
+      startParallaxAnimation();
+    }
+  }, [showSecond]);
+
   // Функция для планирования следующих шагов (смена экрана, завершение)
   const planNextSteps = () => {
     const now = Date.now();
@@ -130,39 +228,6 @@ const IntroCutscene: FC<IntroCutsceneProps> = ({ onComplete, isPaused = false })
       }
     }
   };
-
-  // Эффект параллакса при движении мыши
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!cutsceneRef.current || isPaused) return; // Отключаем параллакс при паузе
-      
-      const elements = cutsceneRef.current.querySelectorAll(`.${styles.parallaxElement}`);
-      const boundingRect = cutsceneRef.current.getBoundingClientRect();
-      
-      // Рассчитываем центр элемента
-      const centerX = boundingRect.left + boundingRect.width / 2;
-      const centerY = boundingRect.top + boundingRect.height / 2;
-      
-      // Рассчитываем смещение от центра
-      const offsetX = (e.clientX - centerX) / 25;
-      const offsetY = (e.clientY - centerY) / 25;
-      
-      // Применяем разные значения смещения для разных элементов
-      elements.forEach((element, index) => {
-        const multiplier = (index + 1) * 0.8;
-        const x = offsetX * multiplier;
-        const y = offsetY * multiplier;
-        
-        (element as HTMLElement).style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      });
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [isPaused]);
 
   // Сброс состояния при размонтировании компонента приложения
   useEffect(() => {

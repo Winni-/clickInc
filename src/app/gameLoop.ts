@@ -88,11 +88,16 @@ function recalculateTalents(state: GameState): StateTalent[] {
     
     // Проверяем условия доступности
     const isAvailable = requirementsMet && talent.available.every(condition => condition(state));
+
+    // Проверяем условия для затенения
+    const isShaded = talent.shade?.some(condition => condition(state));
+
     // Возвращаем обновленный талант со всеми вычисленными свойствами
     return {
       id: talent.id,
       isVisible,
       isAvailable,
+      isShaded,
       state: stateTalent!.state
     };
   });
@@ -303,10 +308,10 @@ export const calculateTick = (state: GameState, deltaTime: number, windowSize: {
     const hasEnoughEconomy = state.spheres[ECONOMY].resources >= ECONOMY_RESOURCES_FOR_FIRST_STAGE; // 500k economy
 
 
-    if (allCountriesConquered && 
-        hasEnoughResources && 
-        hasEnoughScience && 
-        hasEnoughFaith && 
+    if (allCountriesConquered || 
+        hasEnoughResources || 
+        hasEnoughScience || 
+        hasEnoughFaith || 
         hasEnoughEconomy) {
       updates.stage = 2;
       updates.secondStage = [...state.secondStage, 'space_travel_unlocked'];

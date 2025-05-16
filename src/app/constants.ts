@@ -11,9 +11,9 @@ export const NEWS_DISPLAY_TIME = 10000; // 10 секунд
 export const NEWS_INTERVAL =  30000; // 30 секунд
 
 // Константы для первой стадии
-export const TOTAL_RESOURCES_FOR_FIRST_STAGE = 100000; // 1 million resources
-export const SCIENCE_RESOURCES_FOR_FIRST_STAGE = 50000; // 500k science
-export const FAITH_RESOURCES_FOR_FIRST_STAGE = 50000; // 500k faith
-export const ECONOMY_RESOURCES_FOR_FIRST_STAGE = 120000; // 500k economy
+export const TOTAL_RESOURCES_FOR_FIRST_STAGE = 100000; // 100k resources
+export const SCIENCE_RESOURCES_FOR_FIRST_STAGE = 50000; // 50k science
+export const FAITH_RESOURCES_FOR_FIRST_STAGE = 50000; // 50k faith
+export const ECONOMY_RESOURCES_FOR_FIRST_STAGE = 200000; // 200k economy
 
 

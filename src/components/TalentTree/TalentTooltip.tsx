@@ -15,11 +15,17 @@ const getCategoryClass = (category: string): string => {
 
 // Функция-адаптер для совместимости с предыдущим кодом
 export const getTalentEffects = (talent: Talent): string[] => {
+  if (talent.meta?.effectDesctription) {
+    return [talent.meta.effectDesctription];
+  }
   return getEffectsDescription(talent.effects);
 };
 
 // Получение требований таланта
 const getTalentRequirements = (talent: Talent): string[] => {
+  if (talent.meta?.requirementsDescription) {
+    return [talent.meta.requirementsDescription];
+  }
   const requirements: string[] = [];
   
   // Проверяем, есть ли зависимости от других талантов
@@ -144,6 +150,11 @@ const TalentTooltip: React.FC<TalentTooltipProps> = ({
           </div>
         )}
       </div>
+      {talent.meta?.flavorText && (
+        <div className={styles.tooltipFlavorText}>
+          {talent.meta.flavorText}
+        </div>
+      )}
     </div>
   );
 };

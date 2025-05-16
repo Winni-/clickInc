@@ -85,8 +85,8 @@ export const Projects: Record<string, Project> = {
         name: 'New Material',
         description: 'Начать разработку новых материалов',
         icon: '🧬',
-        progress: 0.1,
-        speed: 1,
+        progress:0,
+        speed: 0.01,
         effects: [
             (state) => {
                 const materials = ['nanotubes', 'quantum-threads', 'dark-matter', 'negative-mass-matter'];
@@ -103,8 +103,8 @@ export const Projects: Record<string, Project> = {
         name: 'Antiair Gun',
         description: 'Создать пушку, что сможет отклонить снаряд от земли',
         icon: '💂‍♀️🧬',
-        progress: 0.01,
-        speed: 1,
+        progress: 0,
+        speed: 0.004,
         effects: [
             (state) => state.multipliers[ECONOMY] += 0.20,
             (state) => state.secondStage.push('antiair-gun')
@@ -128,8 +128,8 @@ export const Projects: Record<string, Project> = {
         name: 'Dyson Swarm',
         description: 'Создать рой из спутников, вокруг Солнца.',
         icon: '🛰',
-        progress: 0.5,
-        speed: 1,
+        progress: 0,
+        speed: 0.5,
         effects: [
             (state) => state.multipliers[SCIENCE] += 0.20,
             (state) => state.secondStage.push('dyson-swarm')
@@ -138,15 +138,41 @@ export const Projects: Record<string, Project> = {
             (state) => state.resources -= 1000
         ]
     },
+    'dyson-circle': {
+        id: 'dyson-circle',
+        name: 'Dyson Circle',
+        description: 'Создать кольцо из спутников, вокруг Солнца.',
+        icon: '🛰',
+        progress: 0,
+        speed: 0.04,
+        effects: [
+            (state) => state.multipliers[SCIENCE] += 0.50,
+            (state) => state.secondStage.push('dyson-circle')
+        ],
+        failEffects: [
+            (state) => state.resources -= 5000,
+            (state) => state.conquestSpeed -= 0.50
+        ],
+        problems: [
+            (state) => {
+                if (state.seed > 0.9) {
+                    state.problems.push({
+                        id: 'gravitation',
+                        projectId: 'dyson-circle'
+                    });
+                }
+            }
+        ]
+    },
     'dyson-sphere': {
         id: 'dyson-sphere',
         name: 'Dyson Sphere',
         description: 'Создать сферу из спутников, вокруг Солнца.',
         icon: '🛰',
-        progress: 0.5,
-        speed: 1,
+        progress: 0,
+        speed: 0.001,
         effects: [
-            (state) => state.multipliers[SCIENCE] += 0.50,
+            (state) => state.multipliers[SCIENCE] += 2,
             (state) => state.secondStage.push('dyson-sphere')
         ],
         failEffects: [
@@ -169,8 +195,8 @@ export const Projects: Record<string, Project> = {
         name: 'Research Artifact',
         description: 'Создать группу монахов, что будут искать древние священные артефакты',
         icon: '🧬',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.00006,
         effects: [
             // will turn RESEARCH_ARTIFACT on
         ],
@@ -193,8 +219,8 @@ export const Projects: Record<string, Project> = {
         name: 'Extraterrestrial Search',
         description: 'Создать массив спутников и радаров, что будут искать контакт с внеземными цивилизациями',
         icon: '🌌',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.000001,
         effects: [
             (state) => {
                 if (Math.random() < 0.5) {
@@ -226,8 +252,8 @@ export const Projects: Record<string, Project> = {
         name: 'Strange Dust',
         description: 'Проводится эксперимент по созданию странного вещества, которое может стать ответом на наши вопросы',
         icon: '🧬',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.2,
         effects: [
             (state) => state.secondStage.push('spice')
         ],
@@ -253,8 +279,8 @@ export const Projects: Record<string, Project> = {
         name: 'Nanoshield',
         description: 'Создать щит, защищающий корабль от опасностей при быстром перемещении',
         icon: '🌌',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.5,
         effects: [
             (state) => state.cosmicCivilization.shipShield = true
         ],
@@ -270,8 +296,8 @@ export const Projects: Record<string, Project> = {
         name: 'Spice Shield',
         description: 'Создать щит, защищающий корабль от опасностей при быстром перемещении',
         icon: '🌌',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.5,
         effects: [
             (state) => state.cosmicCivilization.shipShield = true
         ],
@@ -287,8 +313,8 @@ export const Projects: Record<string, Project> = {
         name: 'Quantum Beacon',
         description: 'Создание квантовых маяков, что позволит нам перемещаться между планетами',
         icon: '🌌',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.1,
         effects: [
             (state) => state.cosmicCivilization.conquest = true
         ],
@@ -304,8 +330,8 @@ export const Projects: Record<string, Project> = {
         name: 'Space Folding Engine',
         description: 'Создание двигателя, что позволит нам перемещаться между планетами',
         icon: '🌌',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.1,
         effects: [
             (state) => state.cosmicCivilization.FTL = true
         ],
@@ -321,8 +347,8 @@ export const Projects: Record<string, Project> = {
         name: 'White Hole',
         description: 'Создание чревоточины, что позволит нам перемещаться между планетами',
         icon: '🌌',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.11,
         effects: [
             (state) => state.cosmicCivilization.FTL = true
         ],
@@ -343,8 +369,8 @@ export const Projects: Record<string, Project> = {
         name: 'Big Fold',
         description: 'Сворачивание пространства от нас прямо к врагу!',
         icon: '🌌', 
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.11,
         effects: [
             (state) => state.cosmicCivilization.FTL = true
         ],
@@ -365,8 +391,8 @@ export const Projects: Record<string, Project> = {
         name: 'Obsidian Portal',
         description: 'Создание портала, что позволит нам перемещаться между планетами',
         icon: '🌌',
-        progress: 0.1,
-        speed: 1,
+        progress: 0,
+        speed: 0.11,
         effects: [
             (state) => state.cosmicCivilization.FTL = true,
             (state) => state.cosmicCivilization.conquest = true,
