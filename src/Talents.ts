@@ -20,6 +20,9 @@ export const TALENTS: Talent[] = [
     effects: [
       (state) => { state.conquestSpeed += 0.10 },
     ],
+    meta: {
+      
+    }
   },
   {
     id: 'banker',
