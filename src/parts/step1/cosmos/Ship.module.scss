@@ -1,0 +1,25 @@
+.shipContainer {
+  position: absolute;
+  z-index: 10;
+  transition: all 0.3s ease-out;
+  will-change: transform, left, top;
+}
+
+.ship {
+  user-select: none;
+  font-size: 2rem;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+  
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+  
+  @media (min-width: 1200px) {
+    font-size: 4rem;
+  }
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+} 

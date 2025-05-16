@@ -1,0 +1,206 @@
+// Общие стили для всех роликов
+.introCutscene,
+.transitionCutscene,
+.finalCutscene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: var(--white-smoke);
+  
+  // Состояние паузы для катсцен
+  &.paused {
+    .parallaxElement {
+      transition: none !important; // Отключаем анимацию параллакса при паузе
+    }
+    
+    // Применяем стили паузы для анимаций
+    animation-play-state: paused !important; 
+    
+    // Останавливаем все анимации внутри
+    * {
+      animation-play-state: paused !important;
+      transition: none !important;
+    }
+  }
+  
+  .content {
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 42px;
+    margin-bottom: 24px;
+    font-weight: bold;
+  }
+  
+  .description {
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 10;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    background-color: rgba(29, 27, 28, 0.6); // var(--eerie-black) с прозрачностью
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .animationContainer {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .placeholder {
+      padding: 20px;
+      border: 2px dashed rgba(239, 239, 237, 0.3); // var(--white-smoke) с прозрачностью
+      border-radius: 10px;
+      color: rgba(239, 239, 237, 0.6); // var(--white-smoke) с прозрачностью
+    }
+  }
+}
+
+// Специфичные стили для разных типов роликов
+.introCutscene {
+  position: relative;
+  overflow: hidden;
+  
+  .firstScreen, .secondScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    background-color: var(--eerie-black);
+    transition: opacity 2s ease;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+      opacity: 0.7;
+    }
+    
+    p {
+      position: relative;
+      z-index: 10;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+      background-color: rgba(29, 27, 28, 0.6); // var(--eerie-black) с прозрачностью
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    
+    // Контейнеры для элементов параллакса
+    .parallaxElement {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      
+      &.element1 {
+        top: 20%;
+        left: 15%;
+        width: 150px;
+        height: 150px;
+        opacity: 0.6;
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.1s ease-out;
+      }
+      
+      &.element2 {
+        bottom: 30%;
+        right: 20%;
+        width: 100px;
+        height: 100px;
+        opacity: 0.4;
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.15s ease-out;
+      }
+      
+      &.element3 {
+        top: 40%;
+        right: 30%;
+        width: 80px;
+        height: 80px;
+        opacity: 0.5;
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.2s ease-out;
+      }
+    }
+    
+    img {
+      display: none; // Скрываем img, так как используем background-image
+    }
+  }
+  
+  .firstScreen {
+    opacity: 1;
+    z-index: 2;
+    
+    &::before {
+      background-image: url('../../assets/oumua.jpg');
+    }
+  }
+  
+  .secondScreen {
+    opacity: 0;
+    z-index: 1;
+    
+    &::before {
+      background-image: url('../../assets/Pluton.jpg');
+    }
+  }
+  
+  // Класс для активации второго экрана
+  &.showSecond {
+    .firstScreen {
+      opacity: 0;
+    }
+    
+    .secondScreen {
+      opacity: 1;
+      z-index: 3;
+    }
+  }
+  
+  // Приостанавливаем анимацию смены экранов при паузе
+  &.paused {
+    .firstScreen, .secondScreen {
+      transition: none !important;
+    }
+  }
+}
+
+.transitionCutscene {
+  background: linear-gradient(135deg, var(--cornell-red), var(--eerie-black));
+  
+  .title {
+    color: var(--light-yellow);
+  }
+}
+
+.finalCutscene {
+  background: linear-gradient(135deg, var(--gunmetal), var(--eerie-black));
+  
+  .title {
+    color: var(--melon);
+  }
+} 

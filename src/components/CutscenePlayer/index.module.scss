@@ -1,0 +1,132 @@
+// Стили для компонента CutscenePlayer
+.cutscenePlayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    filter: brightness(1);
+    
+    &.paused {
+      filter: brightness(0.6);
+    }
+  }
+  
+  // Индикатор паузы
+  .pauseIndicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 20;
+    
+    &.visible {
+      opacity: 0.7;
+    }
+    
+    .pauseBars {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      .bar {
+        width: 8px;
+        height: 32px;
+        background-color: var(--white-smoke, #fff);
+        border-radius: 2px;
+        margin: 0 4px;
+      }
+    }
+  }
+  
+  .skipButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+    
+    &:hover, &.visible {
+      opacity: 1;
+    }
+    
+    &.active {
+      opacity: 1;
+    }
+  }
+  
+  .progressRing {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    
+    .progressBg, .progressFill {
+      fill: none;
+      stroke-width: 2.8;
+      stroke-linecap: round;
+    }
+    
+    .progressBg {
+      stroke: rgba(255, 255, 255, 0.2);
+    }
+    
+    .progressFill {
+      stroke: #fff;
+      transition: stroke-dasharray 0.1s linear;
+    }
+    
+    .skipKey {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+  
+  .skipText {
+    font-size: 14px;
+    color: #fff;
+    margin-top: 5px;
+    text-transform: uppercase;
+  }
+} 
