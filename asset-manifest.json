@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/clickInc/static/css/main.e54f2f63.css",
-    "main.js": "/clickInc/static/js/main.7493950a.js",
-    "static/js/135.0828f21a.chunk.js": "/clickInc/static/js/135.0828f21a.chunk.js",
+    "main.css": "/clickInc/static/css/main.1eacbe16.css",
+    "main.js": "/clickInc/static/js/main.35af2d09.js",
+    "static/js/415.16c26a0c.chunk.js": "/clickInc/static/js/415.16c26a0c.chunk.js",
     "static/js/453.95007742.chunk.js": "/clickInc/static/js/453.95007742.chunk.js",
     "static/media/PIA03239.jpg": "/clickInc/static/media/PIA03239.5e0f8c5444349b9d5da9.jpg",
     "static/media/PIA23774-Comparison-Earth-Keper1649c-20200415.jpg": "/clickInc/static/media/PIA23774-Comparison-Earth-Keper1649c-20200415.8d96ed108babb602e7a6.jpg",
@@ -18,7 +18,9 @@
     "static/media/economy.png": "/clickInc/static/media/economy.238ff9af01cc12bd0ff7.png",
     "static/media/back.jpg": "/clickInc/static/media/back.983bc0c239c767be736c.jpg",
     "static/media/science.png": "/clickInc/static/media/science.57c7c41f332176f4c1a3.png",
+    "static/media/talant.jpg": "/clickInc/static/media/talant.a276fb733764b4a733a5.jpg",
     "static/media/PIA23408-Exoplanet-TOI700d-20200106.jpg": "/clickInc/static/media/PIA23408-Exoplanet-TOI700d-20200106.b4b873521f98fb014c21.jpg",
+    "static/media/border.png": "/clickInc/static/media/border.4c522bc98471724adf9b.png",
     "static/media/Cornerita-VF.ttf": "/clickInc/static/media/Cornerita-VF.a7316b4090b50fe5f3df.ttf",
     "static/media/Marske.ttf": "/clickInc/static/media/Marske.d605967dc466b55a6e8c.ttf",
     "static/media/Cornerita Black.ttf": "/clickInc/static/media/Cornerita Black.b23ea6b76acf5bdc268d.ttf",
@@ -26,18 +28,24 @@
     "static/media/Cornerita Thin.ttf": "/clickInc/static/media/Cornerita Thin.9fe48f5a6254b671f822.ttf",
     "static/media/Cornerita Regular.ttf": "/clickInc/static/media/Cornerita Regular.1f65c6f8e93114d3f919.ttf",
     "static/media/K2-72 e.jpg": "/clickInc/static/media/K2-72 e.43c413bd5301c60ae40f.jpg",
+    "static/media/proj.jpg": "/clickInc/static/media/proj.43227bd81e34884ef87e.jpg",
     "static/media/BigStar.png": "/clickInc/static/media/BigStar.ca79e7f2d17893fa2470.png",
+    "static/media/problem.jpg": "/clickInc/static/media/problem.be1809fab0239435f30d.jpg",
+    "static/media/upg.jpg": "/clickInc/static/media/upg.a14c34eda3f008b53351.jpg",
+    "static/media/conq.jpg": "/clickInc/static/media/conq.c97e238c5927aefed763.jpg",
+    "static/media/click.jpg": "/clickInc/static/media/click.b1c68506a47a0708d132.jpg",
     "static/media/smallstat.png": "/clickInc/static/media/smallstat.11cd0b6eba624e29f075.png",
     "static/media/small.png": "/clickInc/static/media/small.e1bec856b9bbc42d9ab0.png",
+    "static/media/Border=Striped2.png": "/clickInc/static/media/Border=Striped2.62e4ec309cfe0c78621e.png",
     "static/media/Marske.otf": "/clickInc/static/media/Marske.56773e2f9c5dd243d25e.otf",
     "index.html": "/clickInc/index.html",
-    "main.e54f2f63.css.map": "/clickInc/static/css/main.e54f2f63.css.map",
-    "main.7493950a.js.map": "/clickInc/static/js/main.7493950a.js.map",
-    "135.0828f21a.chunk.js.map": "/clickInc/static/js/135.0828f21a.chunk.js.map",
+    "main.1eacbe16.css.map": "/clickInc/static/css/main.1eacbe16.css.map",
+    "main.35af2d09.js.map": "/clickInc/static/js/main.35af2d09.js.map",
+    "415.16c26a0c.chunk.js.map": "/clickInc/static/js/415.16c26a0c.chunk.js.map",
     "453.95007742.chunk.js.map": "/clickInc/static/js/453.95007742.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e54f2f63.css",
-    "static/js/main.7493950a.js"
+    "static/css/main.1eacbe16.css",
+    "static/js/main.35af2d09.js"
   ]
 }
