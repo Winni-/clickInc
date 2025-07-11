@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "./static/css/main.546ea1f5.css",
-    "main.js": "./static/js/main.ad398fe6.js",
-    "static/js/870.d4acae8e.chunk.js": "./static/js/870.d4acae8e.chunk.js",
+    "main.css": "./static/css/main.cfdf6852.css",
+    "main.js": "./static/js/main.db8880cb.js",
+    "static/js/870.4b2589fb.chunk.js": "./static/js/870.4b2589fb.chunk.js",
     "static/js/453.95007742.chunk.js": "./static/js/453.95007742.chunk.js",
     "static/media/PIA03239.jpg": "./static/media/PIA03239.5e0f8c5444349b9d5da9.jpg",
     "static/media/Nebula Aqua-Pink.png": "./static/media/Nebula Aqua-Pink.f012268c2774b8af1229.png",
@@ -55,13 +55,13 @@
     "index.html": "./index.html",
     "static/media/danger_marker.svg": "./static/media/danger_marker.36fd7b5d00ab788ac228.svg",
     "static/media/left_bg.svg": "./static/media/left_bg.7bad49a99f256a0f77e5.svg",
-    "main.546ea1f5.css.map": "./static/css/main.546ea1f5.css.map",
-    "main.ad398fe6.js.map": "./static/js/main.ad398fe6.js.map",
-    "870.d4acae8e.chunk.js.map": "./static/js/870.d4acae8e.chunk.js.map",
+    "main.cfdf6852.css.map": "./static/css/main.cfdf6852.css.map",
+    "main.db8880cb.js.map": "./static/js/main.db8880cb.js.map",
+    "870.4b2589fb.chunk.js.map": "./static/js/870.4b2589fb.chunk.js.map",
     "453.95007742.chunk.js.map": "./static/js/453.95007742.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.546ea1f5.css",
-    "static/js/main.ad398fe6.js"
+    "static/css/main.cfdf6852.css",
+    "static/js/main.db8880cb.js"
   ]
 }
